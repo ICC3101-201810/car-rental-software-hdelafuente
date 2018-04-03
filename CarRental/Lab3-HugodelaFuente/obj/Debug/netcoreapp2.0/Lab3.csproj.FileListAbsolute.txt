@@ -1,0 +1,11 @@
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\bin\Debug\netcoreapp2.0\Lab3.deps.json
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\bin\Debug\netcoreapp2.0\Lab3.runtimeconfig.json
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\bin\Debug\netcoreapp2.0\Lab3.runtimeconfig.dev.json
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\bin\Debug\netcoreapp2.0\Lab3.dll
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\bin\Debug\netcoreapp2.0\Lab3.pdb
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\obj\Debug\netcoreapp2.0\Lab3.csprojResolveAssemblyReference.cache
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\obj\Debug\netcoreapp2.0\Lab3.csproj.CoreCompileInputs.cache
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\obj\Debug\netcoreapp2.0\Lab3.AssemblyInfoInputs.cache
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\obj\Debug\netcoreapp2.0\Lab3.AssemblyInfo.cs
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\obj\Debug\netcoreapp2.0\Lab3.dll
+C:\Users\HDF\Desktop\Lab3\Lab3-HugodelaFuente\Lab3-HugodelaFuente\obj\Debug\netcoreapp2.0\Lab3.pdb
