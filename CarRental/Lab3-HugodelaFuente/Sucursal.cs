@@ -37,6 +37,9 @@ namespace Lab3
         {
             return this.vehiculos;
         }
-
+        public string getName()
+        {
+            return this.nombre_sucursal;
+        }
     }
 }

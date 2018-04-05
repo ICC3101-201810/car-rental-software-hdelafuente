@@ -10,14 +10,14 @@ namespace Lab3
         string nombre;
         String apellido;
         string giro;
-        List<Vehiculo> enArriendo;
+        bool licencia;
         public Cliente(string Rut, string Nombre, string tipo, string Apellido)
         {
             rut = Rut;
             nombre = Nombre;
             apellido = Apellido;
             giro = tipo;
-            enArriendo = new List<Vehiculo>();
+            licencia = true;
         }
         public String getRut()
         {

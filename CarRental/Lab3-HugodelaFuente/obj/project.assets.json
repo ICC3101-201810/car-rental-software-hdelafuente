@@ -671,11 +671,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HDF\\Desktop\\Lab3\\Lab3-HugodelaFuente\\Lab3-HugodelaFuente\\Lab3.csproj",
+      "projectUniqueName": "C:\\Users\\HDF\\Desktop\\car-rental-software-hdelafuente\\CarRental\\Lab3-HugodelaFuente\\Lab3.csproj",
       "projectName": "Lab3",
-      "projectPath": "C:\\Users\\HDF\\Desktop\\Lab3\\Lab3-HugodelaFuente\\Lab3-HugodelaFuente\\Lab3.csproj",
+      "projectPath": "C:\\Users\\HDF\\Desktop\\car-rental-software-hdelafuente\\CarRental\\Lab3-HugodelaFuente\\Lab3.csproj",
       "packagesPath": "C:\\Users\\HDF\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HDF\\Desktop\\Lab3\\Lab3-HugodelaFuente\\Lab3-HugodelaFuente\\obj\\",
+      "outputPath": "C:\\Users\\HDF\\Desktop\\car-rental-software-hdelafuente\\CarRental\\Lab3-HugodelaFuente\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
