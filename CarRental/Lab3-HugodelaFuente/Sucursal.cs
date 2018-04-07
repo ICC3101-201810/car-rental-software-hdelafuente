@@ -28,6 +28,9 @@ namespace Lab3
         {
             String arriendo = "Cliente: " + cliente.getNombre() + "rut: " + cliente.getRut() + maquina.getInfo();
             registro.Add(arriendo);
+            vehiculos.Remove(maquina);
+            cliente.arrienda(maquina);
+            maquina.resta();
         }
         public string getRut()
         {
@@ -40,6 +43,18 @@ namespace Lab3
         public string getName()
         {
             return this.nombre_sucursal;
+        }
+        public void devuelve(Cliente cliente, Vehiculo maquina)
+        {
+            String arriendo = "Cliente: " + cliente.getNombre() + "rut: " + cliente.getRut() + "retorna vehiculo " + maquina.getInfo();
+            vehiculos.Add(maquina);
+            registro.Add(arriendo);
+            cliente.devuelve(maquina);
+            maquina.suma();
+        }
+        public string getInfo()
+        {
+            return "Nombre Sucursal: " + this.nombre_sucursal + "rut: " + this.rut + "Ubicacion: " + this.ubicacion;
         }
     }
 }
