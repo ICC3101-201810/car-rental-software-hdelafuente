@@ -10,27 +10,38 @@ namespace Lab3
         string nombre_sucursal;
         string ubicacion;
         List<Vehiculo> vehiculos;
-        List<String> registro; 
+        List<String> registro_arriendos;
+        List<String> registro_devoluciones;
         public Sucursal(string Rut, string Nombre, string Ubicacion)
         {
             rut = Rut;
             nombre_sucursal = Nombre;
             ubicacion = Ubicacion;
             vehiculos = new List<Vehiculo>();
-            registro = new List<String>();
+            registro_arriendos = new List<String>();
         }
 
         public void agregaVehiculo(Vehiculo maquina)
         {
             vehiculos.Add(maquina);
         }
-        public void arrienda(Cliente cliente, Vehiculo maquina)
+        public void arrienda(Cliente cliente, Vehiculo maquina, int dias)
         {
-            String arriendo = "Cliente: " + cliente.getNombre() + "rut: " + cliente.getRut() + maquina.getInfo();
-            registro.Add(arriendo);
-            vehiculos.Remove(maquina);
-            cliente.arrienda(maquina);
-            maquina.resta();
+            int price = maquina.SetPrecio(dias);
+            String arriendo = "Cliente: " + cliente.getNombre() + " rut: " + cliente.getRut() + maquina.getInfo() + "Precio: " + price.ToString() + "Fecha Retorno: " + (DateTime.Today.Day + dias).ToString() +"/"+ DateTime.Today.Month.ToString();
+            registro_arriendos.Add(arriendo);
+            if (maquina.getCantidad()==1)
+            {
+                vehiculos.Remove(maquina);
+                cliente.arrienda(maquina);
+                maquina.Resta();
+            }
+            else
+            {
+                cliente.arrienda(maquina);
+                maquina.Resta();
+            }
+            
         }
         public string getRut()
         {
@@ -46,15 +57,15 @@ namespace Lab3
         }
         public void devuelve(Cliente cliente, Vehiculo maquina)
         {
-            String arriendo = "Cliente: " + cliente.getNombre() + "rut: " + cliente.getRut() + "retorna vehiculo " + maquina.getInfo();
+            String arriendo = "Cliente: " + cliente.getNombre() + " rut: " + cliente.getRut() + " retorna vehiculo " + maquina.getInfo();
             vehiculos.Add(maquina);
-            registro.Add(arriendo);
+            registro_devoluciones.Add(arriendo);
             cliente.devuelve(maquina);
-            maquina.suma();
+            maquina.Suma();
         }
         public string getInfo()
         {
-            return "Nombre Sucursal: " + this.nombre_sucursal + "rut: " + this.rut + "Ubicacion: " + this.ubicacion;
+            return "Nombre Sucursal: " + this.nombre_sucursal + " rut: " + this.rut + " Ubicacion: " + this.ubicacion;
         }
     }
 }

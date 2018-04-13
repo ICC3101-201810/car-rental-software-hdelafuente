@@ -8,45 +8,90 @@ namespace Lab3
     {
         string marca;
         string modelo;
-        string tipo;
-        string motor;
+        int tipo;
+        string patente;
         int cantidad;
-        List<string> accesorios;
+        List<Accesorios> accesorios;
 
-        public Vehiculo(string Marca,string Modelo,string Tipo, string Motor, int Cantidad)
+        Dictionary<int, string> Tipo = new Dictionary<int, string>
+        {
+            {1, "Auto"},
+            {2, "Camioneta" },
+            {3, "Moto" },
+            {4, "Camion" },
+            {5, "Bus" },
+            {6, "Maquinaria Pesada" },
+            {7, "Acuatico" }
+            
+        };
+
+        Dictionary<int, int> Precio = new Dictionary<int, int>
+        {
+            {1, 30000},
+            {2, 45000},
+            {3, 15000},
+            {4, 200000},
+            {5, 100000},
+            {6, 300000 },
+            {7, 50000 }
+
+        };
+
+        public Vehiculo(string Marca,string Modelo, string Patente, int Cantidad)
         {
             marca = Marca;
             modelo = Marca;
-            tipo = Tipo;
-            motor = Motor;
+            patente = Patente;
             cantidad = Cantidad;
-            accesorios = new List<string>();
+            accesorios = new List<Accesorios>();
         }
-        public string getInfo()
+
+        public void SetTipo(int numero)
         {
-            return "Marca: " + this.marca + "Modelo: " + this.modelo + "Motor: " + this.motor + "Tipo: " + this.tipo; 
+            tipo = numero;
         }
-        public string getTipo()
+
+        public int GetTipo()
         {
             return this.tipo;
         }
+
+        public int SetPrecio(int dias)
+        {
+            int contador=0;
+            foreach (Accesorios item in accesorios)
+            {
+                contador+=item.GetPrecioAcc();
+            }
+            return dias * Precio[this.tipo] + contador;
+        }
+
+        public string getInfo()
+        {
+            return Tipo[this.tipo] + " Patente: " + this.patente; 
+        }
+
         public int getCantidad()
         {
             return this.cantidad;
         }
-        public void suma()
+
+        public void Suma()
         {
             cantidad++;
         }
-        public void resta()
+
+        public void Resta()
         {
             cantidad--;
         }
-        public void resetAcc()
+
+        public void ResetAcc()
         {
-            accesorios = new List<string>();
+            accesorios = new List<Accesorios>();
         }
-        public void setAcc(List<string> acc)
+
+        public void SetAcc(List<Accesorios> acc)
         {
             accesorios = acc;
         }

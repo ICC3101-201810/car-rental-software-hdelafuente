@@ -9,16 +9,14 @@ namespace Lab3
         string rut;
         string nombre;
         String apellido;
-        string giro;
-        bool licencia;
+        string razon_social;
         List<Vehiculo> en_arriendo;
         public Cliente(string Rut, string Nombre, string tipo, string Apellido)
         {
             rut = Rut;
             nombre = Nombre;
             apellido = Apellido;
-            giro = tipo;
-            licencia = true;
+            razon_social = tipo;
             en_arriendo = new List<Vehiculo>();
         }
         public String getRut()
@@ -44,7 +42,7 @@ namespace Lab3
         }
         public string getInfo()
         {
-            return "Nombre Sucursal: " + this.nombre + " " + this.apellido + "rut: " + this.rut ;
+            return "Nombre Sucursal: " + this.nombre + " " + this.apellido + " rut: " + this.rut ;
         }
     }
 }
