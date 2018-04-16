@@ -55,6 +55,11 @@ namespace Lab3
         {
             return this.tipo;
         }
+        
+        public string GetPatente()
+        {
+            return this.patente;
+        }
 
         public int SetPrecio(int dias)
         {

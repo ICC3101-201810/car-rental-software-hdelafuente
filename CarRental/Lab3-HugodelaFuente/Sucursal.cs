@@ -30,17 +30,8 @@ namespace Lab3
             int price = maquina.SetPrecio(dias);
             String arriendo = "Cliente: " + cliente.getNombre() + " rut: " + cliente.getRut() + maquina.getInfo() + "Precio: " + price.ToString() + "Fecha Retorno: " + (DateTime.Today.Day + dias).ToString() +"/"+ DateTime.Today.Month.ToString();
             registro_arriendos.Add(arriendo);
-            if (maquina.getCantidad()==1)
-            {
-                vehiculos.Remove(maquina);
-                cliente.arrienda(maquina);
-                maquina.Resta();
-            }
-            else
-            {
-                cliente.arrienda(maquina);
-                maquina.Resta();
-            }
+            cliente.arrienda(maquina);
+            maquina.Resta();
             
         }
         public string getRut()

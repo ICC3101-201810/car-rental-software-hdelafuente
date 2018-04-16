@@ -5,7 +5,69 @@ namespace Lab3
 {
     class Program
     {
-        
+        static public void VehiculosPersona(string rut, List<Cliente> lista_clientes)
+        {
+            Console.WriteLine("------------------------\n");
+            foreach (Cliente persona in lista_clientes)
+            {
+                if (persona.getRut()==rut)
+                {
+                    foreach (Vehiculo maquina in persona.getVehiculos())
+                    {
+                        Console.WriteLine(maquina.getInfo());
+                    }
+                }
+                Console.WriteLine("Cliente no registrado...");
+            }
+            Console.WriteLine("------------------------\n");
+            Console.Write("Seleccione Patente: ");
+        }
+        static public Vehiculo BuscaVehiculo(string patente, List<Vehiculo> maquinas)
+        {
+            foreach (Vehiculo maquina in maquinas)
+            {
+                if (maquina.GetPatente() == patente)
+                {
+                    return maquina;
+                }
+            }
+            return null;
+        }
+        static public Cliente BuscaPersona(string rut, List<Cliente> Personas)
+        {
+            foreach (Cliente persons in Personas)
+            {
+                if (rut==persons.getRut())
+                {
+                    return persons;
+                }
+
+            }
+            return null;
+        }
+        static public Sucursal BuscaSucursal(string rut, List<Sucursal> lista)
+        {
+            foreach (Sucursal lugar in lista)
+            {
+                if (rut == lugar.getRut())
+                {
+                    return lugar;
+                }
+            }
+            return null;
+        }
+        static public void EligeVehiculo()
+        {
+            Console.Write("Tipo de vehiculo" +
+                        "\n 1.Auto" +
+                        "\n 2.Camioneta" +
+                        "\n 3.Moto" +
+                        "\n4.Camion" +
+                        "\n5.Bus " +
+                        "\n6.Maquinaria Pesada" +
+                        "\n7.Acuatico" +
+                        "\n Numero: ");
+        }        
         static public string MuestraSucursales(List<Sucursal> sucursales)
         {
             Console.WriteLine("Sucursales Disponibles");
@@ -120,15 +182,7 @@ namespace Lab3
                     Modelo.ToLower();
                     Console.Write("Patente: ");
                     String patente = Console.ReadLine();
-                    Console.Write("Tipo de vehiculo" +
-                        "\n 1.Auto" +
-                        "\n 2.Camioneta" +
-                        "\n 3.Moto" +
-                        "\n4.Camion" +
-                        "\n5.Bus " +
-                        "\n6.Maquinaria Pesada" +
-                        "\n7.Acuatico" +
-                        "\n Numero: ");
+                    EligeVehiculo();
                     int tipo = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Cuantas?");
                     int cantidad = Convert.ToInt32(Console.ReadLine());
@@ -159,7 +213,7 @@ namespace Lab3
                     des2.ToLower();
                     if (des2 == "si")
                     {
-                        Console.WriteLine("Tipo de vehiculo\n1.Auto\n2.Camioneta\n3.Moto\n4.Camion\n5.Bus\n6.Maquinaria Pesada\n7.Acuatico\nNumero: ");
+                        EligeVehiculo();
                         int algo =Convert.ToInt32(Console.ReadLine());
                         List<Accesorios> acc = new List<Accesorios>();
                         while (true)
@@ -184,96 +238,101 @@ namespace Lab3
                         MuestraClientes(clientes);
                         Console.WriteLine("Rut del cliente: ");
                         String rut = Console.ReadLine();
+                        Cliente persona = BuscaPersona(rut, clientes);
+                        if (persona == null)
+                        {
+                            Console.WriteLine("Cliente no registrado...");
+                            goto Menu;
+                        }
+                        VehiculosPersona(rut, clientes);
+                        string patente = Console.ReadLine();
+                        Vehiculo maquina = BuscaVehiculo(patente, persona.getVehiculos());
+                        if (maquina == null)
+                        {
+                            Console.WriteLine("Persona no posee vehiculo...");
+                            goto Menu;
+                        }
                         MuestraSucursales(sucursales);
                         Console.WriteLine("Rut de la sucursal: ");
                         String rut2 = Console.ReadLine();
-                        foreach (Cliente persona in clientes)
+                        Sucursal lugar = BuscaSucursal(rut2, sucursales);
+                        if (lugar == null)
                         {
-                            if (persona.getRut() == rut)
-                            {
-                                foreach (Sucursal lugar in sucursales)
-                                {
-                                    if (rut2 == lugar.getRut())
-                                    {
-                                        foreach (Vehiculo maquina in lugar.getVehiculos())
-                                        {
-                                            if (maquina.getCantidad() > 0)
-                                            {
-                                                lugar.arrienda(persona, maquina);
-                                                maquina.SetAcc(acc);
-                                                Console.WriteLine("Arriendo realizado");
-                                                goto Menu;
-                                            }
-                                        }
-                                        Console.WriteLine("Vehiculo no disponible en sucursal...");
-                                        goto Menu;
-
-                                    }
-                                }
-                                Console.WriteLine("Sucursal no encontrada...");
-                                goto Menu;
-                            }
+                            Console.WriteLine("Sucursal no encontrada...");
+                            goto Menu;
                         }
+                        lugar.arrienda(persona, maquina,dias);
                         Console.WriteLine("Cliente no encontrado...");
 
                     }
                     else if (des2=="no")
                     {
-                        Console.WriteLine("Tipo de vehiculo\n1.Auto\n2.Camioneta\n3.Moto\n4.Camion\n5.Bus\n6.Maquinaria Pesada\n7.Acuatico\nNumero: ");
+                        EligeVehiculo();
                         String algo = Console.ReadLine();
                         Console.Write("\nCantidad de dias: ");
                         int dias = Convert.ToInt32(Console.ReadLine());
                         MuestraClientes(clientes);
                         Console.WriteLine("Rut del cliente: ");
                         String rut = Console.ReadLine();
+                        Cliente persona = BuscaPersona(rut, clientes);
+                        if (persona == null)
+                        {
+                            Console.WriteLine("Cliente no registrado...");
+                            goto Menu;
+                        }
+                        VehiculosPersona(rut, clientes);
+                        string patente = Console.ReadLine();
+                        Vehiculo maquina = BuscaVehiculo(patente, persona.getVehiculos());
+                        if (maquina == null)
+                        {
+                            Console.WriteLine("Persona no posee vehiculo...");
+                            goto Menu;
+                        }
                         MuestraSucursales(sucursales);
                         Console.WriteLine("Rut de la sucursal: ");
                         String rut2 = Console.ReadLine();
-                        foreach (Cliente persona in clientes)
+                        Sucursal lugar = BuscaSucursal(rut2, sucursales);
+                        if (lugar == null)
                         {
-                            if (persona.getRut()==rut)
-                            {
-                                foreach (Sucursal lugar in sucursales)
-                                {
-                                    if (rut2==lugar.getRut())
-                                    {
-                                        foreach (Vehiculo maquina in lugar.getVehiculos())
-                                        {
-                                            if (maquina.getCantidad() > 0)
-                                            {
-                                                lugar.arrienda(persona, maquina, dias);
-                                                Console.WriteLine("Arriendo realizado");
-                                                goto Menu;
-                                            }
-                                        }
-                                        Console.WriteLine("Vehiculo no disponible en sucursal...\n");
-                                        goto Menu;
-
-                                    }
-                                }
-                                Console.WriteLine("Sucursal no encontrada...\n");
-                                goto Menu;
-                            }
+                            Console.WriteLine("Sucursal no encontrada...");
+                            goto Menu;
                         }
-                        Console.WriteLine("Cliente no registrado...");
+                        lugar.arrienda(persona, maquina,dias);
 
                     }
 
                 }
                 else if (des=="5")
                 {
-                    Console.WriteLine("Tipo de vehiculo (Auto, Moto, Acuatico, Maquinaria Pesada): ");
-                    String algo = Console.ReadLine();
-                    algo.ToLower();
                     MuestraClientes(clientes);
                     Console.WriteLine("Rut del cliente: ");
                     String rut = Console.ReadLine();
+                    Cliente persona = BuscaPersona(rut, clientes);
+                    if (persona==null)
+                    {
+                        Console.WriteLine("Cliente no registrado...");
+                        goto Menu;
+                    }
+                    VehiculosPersona(rut, clientes);
+                    string patente = Console.ReadLine();
+                    Vehiculo maquina = BuscaVehiculo(patente, persona.getVehiculos());
+                    if (maquina==null)
+                    {
+                        Console.WriteLine("Persona no posee vehiculo...");
+                        goto Menu;
+                    }
                     MuestraSucursales(sucursales);
                     Console.WriteLine("Rut de la sucursal: ");
                     String rut2 = Console.ReadLine();
-                    
-                }
+                    Sucursal lugar = BuscaSucursal(rut2, sucursales);
+                    if (lugar == null)
+                    {
+                        Console.WriteLine("Sucursal no encontrada...");
+                        goto Menu;
+                    }
+                    lugar.devuelve(persona, maquina);
 
+                }
             }
         }
     }
