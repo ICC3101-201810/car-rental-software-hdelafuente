@@ -9,7 +9,7 @@ namespace Lab3
         string marca;
         string modelo;
         int tipo;
-        string patente;
+        List<string> patente;
         int cantidad;
         List<Accesorios> accesorios;
 
@@ -37,11 +37,11 @@ namespace Lab3
 
         };
 
-        public Vehiculo(string Marca,string Modelo, string Patente, int Cantidad)
+        public Vehiculo(string Marca,string Modelo, int Cantidad)
         {
             marca = Marca;
             modelo = Marca;
-            patente = Patente;
+            patente = new List<string>();
             cantidad = Cantidad;
             accesorios = new List<Accesorios>();
         }
@@ -56,7 +56,7 @@ namespace Lab3
             return this.tipo;
         }
         
-        public string GetPatente()
+        public List<string> GetPatente()
         {
             return this.patente;
         }
@@ -71,9 +71,17 @@ namespace Lab3
             return dias * Precio[this.tipo] + contador;
         }
 
-        public string getInfo()
+        public string GetSpecs()
         {
-            return Tipo[this.tipo] + " Patente: " + this.patente; 
+            return this.marca + " " + this.modelo;
+        }
+
+        public void getInfo()
+        {
+            foreach (string patentes in patente)
+            {
+                Console.WriteLine(this.GetSpecs() + "Patente: " + patentes);
+            }
         }
 
         public int getCantidad()

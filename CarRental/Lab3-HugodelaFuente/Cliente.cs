@@ -23,10 +23,6 @@ namespace Lab3
         {
             return this.rut;
         }
-        public String getNombre()
-        {
-            return this.nombre;
-        }
 
         public void arrienda(Vehiculo maquina)
         {
@@ -42,7 +38,7 @@ namespace Lab3
         }
         public string getInfo()
         {
-            return "Nombre Sucursal: " + this.nombre + " " + this.apellido + " rut: " + this.rut ;
+            return "Nombre: " + this.nombre + " " + this.apellido + " rut: " + this.rut ;
         }
     }
 }

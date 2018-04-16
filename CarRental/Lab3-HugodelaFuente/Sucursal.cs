@@ -10,8 +10,8 @@ namespace Lab3
         string nombre_sucursal;
         string ubicacion;
         List<Vehiculo> vehiculos;
-        List<String> registro_arriendos;
-        List<String> registro_devoluciones;
+        private List<String> registro_arriendos;
+        private List<string> registro_devoluciones;
         public Sucursal(string Rut, string Nombre, string Ubicacion)
         {
             rut = Rut;
@@ -19,6 +19,7 @@ namespace Lab3
             ubicacion = Ubicacion;
             vehiculos = new List<Vehiculo>();
             registro_arriendos = new List<String>();
+            registro_devoluciones = new List<String>();
         }
 
         public void agregaVehiculo(Vehiculo maquina)
@@ -28,7 +29,7 @@ namespace Lab3
         public void arrienda(Cliente cliente, Vehiculo maquina, int dias)
         {
             int price = maquina.SetPrecio(dias);
-            String arriendo = "Cliente: " + cliente.getNombre() + " rut: " + cliente.getRut() + maquina.getInfo() + "Precio: " + price.ToString() + "Fecha Retorno: " + (DateTime.Today.Day + dias).ToString() +"/"+ DateTime.Today.Month.ToString();
+            String arriendo = "Cliente: " + cliente.getInfo() + " rut: " + cliente.getRut() +  maquina.GetSpecs() + "Precio: " + price.ToString() + "Fecha Retorno: " + (DateTime.Today.Day + dias).ToString() +"/"+ DateTime.Today.Month.ToString();
             registro_arriendos.Add(arriendo);
             cliente.arrienda(maquina);
             maquina.Resta();
@@ -48,7 +49,7 @@ namespace Lab3
         }
         public void devuelve(Cliente cliente, Vehiculo maquina)
         {
-            String arriendo = "Cliente: " + cliente.getNombre() + " rut: " + cliente.getRut() + " retorna vehiculo " + maquina.getInfo();
+            String arriendo = "Cliente: " + cliente.getInfo() + " rut: " + cliente.getRut() + " retorna vehiculo " + maquina.GetTipo();
             vehiculos.Add(maquina);
             registro_devoluciones.Add(arriendo);
             cliente.devuelve(maquina);
