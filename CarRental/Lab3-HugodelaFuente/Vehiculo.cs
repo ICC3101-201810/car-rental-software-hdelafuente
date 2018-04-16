@@ -46,6 +46,22 @@ namespace Lab3
             accesorios = new List<Accesorios>();
         }
 
+        public void GenerarPatente(int cuantas)
+        {
+            Random rn = new Random();
+            string letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            while (cuantas >= 0)
+            {
+                int letra1 = rn.Next(0,25);
+                int letra2 = rn.Next(0,25);
+                int letra3 = rn.Next(0,25);
+                int letra4 = rn.Next(0,25);
+                int numero1 = rn.Next(0, 100);
+                patente.Add(letras[letra1] + letras[letra2] + letras[letra3] + letras[4] + "-" +numero1.ToString());
+                cuantas--;
+            }
+        }
+
         public void SetTipo(int numero)
         {
             tipo = numero;

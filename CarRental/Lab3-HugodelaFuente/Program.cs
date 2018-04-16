@@ -89,12 +89,8 @@ namespace Lab3
         static void Main(string[] args)
         {
             
-            Sucursal lugar1 = new Sucursal("123456789-0", "sucursal1", "lugar1");
-            Cliente persona1 = new Cliente("19889338-2", "hugo", "persona", "de la fuente");
             List<Sucursal> sucursales = new List<Sucursal>();
-            sucursales.Add(lugar1);
             List<Cliente> clientes = new List<Cliente>();
-            clientes.Add(persona1);
             Console.WriteLine("Bienvenido a RentCar!");
             while (true)
             {
@@ -189,6 +185,7 @@ namespace Lab3
                     int cantidad = Convert.ToInt32(Console.ReadLine());
                     Vehiculo maquina = new Vehiculo(marca, Modelo, cantidad);
                     maquina.SetTipo(tipo);
+                    maquina.GenerarPatente(cantidad);
                     MuestraSucursales(sucursales);
                     Console.Write("Rut de la sucursal: ");
                     String rut_s = Console.ReadLine();
