@@ -6,6 +6,10 @@ namespace Lab3
 {
     class Vehiculo
     {
+        bool electrico;
+        bool dvd;
+        bool asientos_extra;
+        bool maletero_grande;
         string marca;
         string modelo;
         int tipo;
@@ -123,6 +127,23 @@ namespace Lab3
         public void SetAcc(List<Accesorios> acc)
         {
             accesorios = acc;
+        }
+
+        public void AccesoriosAuto()
+        {
+            Console.WriteLine("¿Asientos Extra? (si/no)");
+            string des1 = Console.ReadLine().ToLower();
+            Console.WriteLine("¿DVD? (si/no)");
+            string des2 = Console.ReadLine().ToLower();
+            Console.WriteLine("¿Maletero mas grande? (si/no)");
+            string des3 = Console.ReadLine().ToLower();
+            if (des1 == "no")
+            {
+                Console.WriteLine("¿Electrico? (si/no)");
+                string des4 = Console.ReadLine().ToLower();
+            }
+
+
         }
     }
 }

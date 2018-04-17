@@ -33,6 +33,7 @@ namespace Lab3
             registro_arriendos.Add(arriendo);
             cliente.arrienda(maquina);
             maquina.Resta();
+            Console.Beep();
             
         }
         public string getRut()

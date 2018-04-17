@@ -15,6 +15,20 @@ namespace Lab3
             Console.WriteLine("------------------------\n");
             Console.Write("Seleccione Patente: ");
         }
+        static public void MuestraVehiculosTipo(List<Vehiculo> lista, int tipo)
+        {
+            Console.WriteLine("------------------------\n");
+            foreach (var maquina in lista)
+            {
+                if (maquina.GetTipo()==tipo)
+                {
+                    maquina.getInfo();
+                }
+            }
+            Console.WriteLine("------------------------\n");
+            Console.Write("Seleccione Patente: ");
+        }
+
         static public Vehiculo BuscaVehiculo(string patente, List<Vehiculo> maquinas)
         {
             foreach (Vehiculo maquina in maquinas)
@@ -27,6 +41,8 @@ namespace Lab3
                     }
                 }
             }
+            Console.Beep();
+            Console.Beep();
             return null;
         }
         static public Cliente BuscaPersona(string rut, List<Cliente> Personas)
@@ -39,6 +55,8 @@ namespace Lab3
                 }
 
             }
+            Console.Beep();
+            Console.Beep();
             return null;
         }
         static public Sucursal BuscaSucursal(string rut, List<Sucursal> lista)
@@ -50,6 +68,8 @@ namespace Lab3
                     return lugar;
                 }
             }
+            Console.Beep();
+            Console.Beep();
             return null;
         }
         static public void EligeVehiculo()
@@ -108,6 +128,7 @@ namespace Lab3
                     sucursales.Add(sucursal);
                 }
                 Menu:
+                
                 // <menu>
                 Console.WriteLine("1.Crear Sucursal");
                 Console.WriteLine("2.Relizar un Arriendo");
@@ -116,7 +137,7 @@ namespace Lab3
                 Console.WriteLine("5.Devolver Vehiculo");
                 Console.WriteLine("6.Salir");
                 Console.WriteLine("-------------------------");
-                Console.Write("Opcion: ");
+                Console.Write("Opcion (numero): ");
                 String des = Console.ReadLine();
                 // </menu>
 
@@ -135,10 +156,15 @@ namespace Lab3
                         if (sucursal1.getRut() == rut)
                         {
                             sucursales.Add(sucursal1);
+                            Console.Clear();
+                            Console.WriteLine("Sucursal agregada exitosamente!");
+                            Console.Beep();
                             goto Menu;
                         }
                     }
+                    Console.Clear();
                     Console.WriteLine("Sucursal ya existente...");
+
                 }
                 else if (des=="3")
                 {
@@ -162,8 +188,10 @@ namespace Lab3
                             goto Menu;
                         }
                     }
+                    Console.Beep();
                     clientes.Add(cliente);
-                    
+                    Console.Clear();
+                    Console.WriteLine("Cliente registrado con exito!");
                 }
                 else if (des=="6")
                 {
@@ -189,27 +217,80 @@ namespace Lab3
                     MuestraSucursales(sucursales);
                     Console.Write("Rut de la sucursal: ");
                     String rut_s = Console.ReadLine();
-                    foreach (Sucursal sucursal in sucursales)
+                    Sucursal lugar = BuscaSucursal(rut_s, sucursales);
+                    if (maquina == null)
                     {
-                        if (sucursal.getRut() == rut_s)
-                        {
-                            sucursal.agregaVehiculo(maquina);
-                            Console.WriteLine("\n-------------------------------------------------------------------");
-                            Console.WriteLine("Vehiculo agregado a sucursal: " + sucursal.getName() + " rut: " + rut_s);
-                            Console.WriteLine("-------------------------------------------------------------------\n");
-                            goto Menu;
-                        }
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine("Vehiculo no se encuentra en inventario...");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        goto Menu;
                     }
-                    Console.WriteLine("Sucursal no encontrada...\n");
-
-
+                    Console.Clear();
+                    Console.Beep();
+                    lugar.agregaVehiculo(maquina);
+                    Console.WriteLine("\n-------------------------------------------------------------------");
+                    Console.WriteLine("Vehiculo agregado a sucursal: " + lugar.getName() + " rut: " + rut_s);
+                    Console.WriteLine("-------------------------------------------------------------------\n");
+                    goto Menu;
                 }
                 else if (des=="2")
                 {
+                    EligeVehiculo();
+                    int tipoVehiculo = Convert.ToInt16(Console.ReadLine());
+                    Console.Clear();
+                    Console.Write("\nCantidad de dias: ");
+                    int dias = Convert.ToInt32(Console.ReadLine());
+                    Console.Clear();
+                    MuestraClientes(clientes);
+                    Console.WriteLine("Rut del cliente: ");
+                    String rut = Console.ReadLine();
+                    Cliente persona = BuscaPersona(rut, clientes);
+                    if (persona == null)
+                    {
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine("Cliente no registrado...");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        goto Menu;
+                    }
+                    Console.Clear();
+                    MuestraSucursales(sucursales);
+                    Console.WriteLine("Rut de la sucursal: ");
+                    String rut2 = Console.ReadLine();
+                    Sucursal lugar = BuscaSucursal(rut2, sucursales);
+                    if (lugar == null)
+                    {
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine("Sucursal no encontrada...\n");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        goto Menu;
+                    }
+                    Console.Clear();
+                    MuestraVehiculosTipo(lugar.getVehiculos(), tipoVehiculo);
+                    string patente = Console.ReadLine();
+                    Vehiculo maquina = BuscaVehiculo(patente, lugar.getVehiculos());
+                    if (maquina == null)
+                    {
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine("Vehiculo no se encuentra en inventario...\n");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        goto Menu;
+                    }
                     Console.WriteLine("¿Incluir Accesorios?");
                     String des2 = Console.ReadLine();
                     des2.ToLower();
-                    if (des2 == "si")
+                    if (des2 == "si" && maquina.GetTipo()!=1)
                     {
                         List<Accesorios> acc = new List<Accesorios>();
                         while (true)
@@ -220,7 +301,7 @@ namespace Lab3
                             acc.Add(accesorio);
                             Console.WriteLine("Otro? (si/no)");
                             string des123 = Console.ReadLine();
-                            if (des123=="si")
+                            if (des123 == "si")
                             {
                                 continue;
                             }
@@ -229,103 +310,72 @@ namespace Lab3
                                 break;
                             }
                         }
-                        Console.Write("\nCantidad de dias: ");
-                        int dias = Convert.ToInt32(Console.ReadLine());
-                        MuestraClientes(clientes);
-                        Console.WriteLine("Rut del cliente: ");
-                        String rut = Console.ReadLine();
-                        Cliente persona = BuscaPersona(rut, clientes);
-                        if (persona == null)
-                        {
-                            Console.WriteLine("Cliente no registrado...");
-                            goto Menu;
-                        }
-                        MuestraSucursales(sucursales);
-                        Console.WriteLine("Rut de la sucursal: ");
-                        String rut2 = Console.ReadLine();
-                        Sucursal lugar = BuscaSucursal(rut2, sucursales);
-                        string patente = Console.ReadLine();
-                        Vehiculo maquina = BuscaVehiculo(patente, lugar.getVehiculos());
-                        if (maquina == null)
-                        {
-                            Console.WriteLine("Vehiculo no se encuentra en inventario...");
-                            goto Menu;
-                        }
-                        if (lugar == null)
-                        {
-                            Console.WriteLine("Sucursal no encontrada...");
-                            goto Menu;
-                        }
-                        lugar.arrienda(persona, maquina,dias);
-                        Console.WriteLine("Arriendo Realizado");
+                        lugar.arrienda(persona, maquina, dias);
+                        Console.WriteLine("Arriendo Realizado\n");
                         goto Menu;
+                    }
+                    else if (des2=="si" && maquina.GetTipo()==1)
+                    {
 
                     }
                     else if (des2=="no")
                     {
-                        Console.Write("\nCantidad de dias: ");
-                        int dias = Convert.ToInt32(Console.ReadLine());
-                        MuestraClientes(clientes);
-                        Console.WriteLine("Rut del cliente: ");
-                        String rut = Console.ReadLine();
-                        Cliente persona = BuscaPersona(rut, clientes);
-                        if (persona == null)
-                        {
-                            Console.WriteLine("Cliente no registrado...");
-                            goto Menu;
-                        }
-                        MuestraSucursales(sucursales);
-                        Console.WriteLine("Rut de la sucursal: ");
-                        String rut2 = Console.ReadLine();
-                        Sucursal lugar = BuscaSucursal(rut2, sucursales);
-                        if (lugar == null)
-                        {
-                            Console.WriteLine("Sucursal no encontrada...");
-                            goto Menu;
-                        }
-                        MuestraVehiculos(lugar.getVehiculos());
-                        string patente = Console.ReadLine();
-                        Vehiculo maquina = BuscaVehiculo(patente, lugar.getVehiculos());
-                        if (maquina == null)
-                        {
-                            Console.WriteLine("Vehiculo no se encuentra en inventario...");
-                            goto Menu;
-                        }
                         lugar.arrienda(persona, maquina, dias);
-                        Console.WriteLine("Arriendo Realizado");
+                        Console.WriteLine("Arriendo Realizado\n");
                         goto Menu;
                     }
 
                 }
                 else if (des=="5")
                 {
+                    Console.Clear();
                     MuestraClientes(clientes);
                     Console.WriteLine("Rut del cliente: ");
                     String rut = Console.ReadLine();
                     Cliente persona = BuscaPersona(rut, clientes);
                     if (persona==null)
                     {
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine("Cliente no registrado...");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
                         goto Menu;
                     }
+                    Console.Clear();
                     MuestraVehiculos(persona.getVehiculos());
                     string patente = Console.ReadLine();
                     Vehiculo maquina = BuscaVehiculo(patente, persona.getVehiculos());
                     if (maquina==null)
                     {
-                        Console.WriteLine("Persona no posee vehiculo...");
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine("Cliente no posee vehiculo especificado...");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
                         goto Menu;
                     }
+                    Console.Clear();
                     MuestraSucursales(sucursales);
                     Console.WriteLine("Rut de la sucursal: ");
                     String rut2 = Console.ReadLine();
                     Sucursal lugar = BuscaSucursal(rut2, sucursales);
                     if (lugar == null)
                     {
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine("Sucursal no encontrada...");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
                         goto Menu;
                     }
+                    Console.Clear();
                     lugar.devuelve(persona, maquina);
+                    Console.Beep();
+                    Console.WriteLine("Devolucion Realizada");
 
                 }
             }
