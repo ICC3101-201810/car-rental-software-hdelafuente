@@ -316,7 +316,7 @@ namespace Lab3
                     }
                     else if (des2=="si" && maquina.GetTipo()==1)
                     {
-
+                        maquina.AccesoriosAuto(maquina.GetAccesorios());
                     }
                     else if (des2=="no")
                     {

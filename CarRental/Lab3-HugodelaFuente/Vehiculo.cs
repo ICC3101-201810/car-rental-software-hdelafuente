@@ -10,6 +10,8 @@ namespace Lab3
         bool dvd;
         bool asientos_extra;
         bool maletero_grande;
+
+
         string marca;
         string modelo;
         int tipo;
@@ -108,7 +110,10 @@ namespace Lab3
         {
             return this.cantidad;
         }
-
+        public List<Accesorios> GetAccesorios()
+        {
+            return this.accesorios;
+        }
         public void Suma()
         {
             cantidad++;
@@ -129,21 +134,50 @@ namespace Lab3
             accesorios = acc;
         }
 
-        public void AccesoriosAuto()
+        public void AccesoriosAuto(List<Accesorios> accesorios)
         {
             Console.WriteLine("¿Asientos Extra? (si/no)");
             string des1 = Console.ReadLine().ToLower();
+            if (des1 == "si")
+            {
+                asientos_extra = true;
+            }
+            
             Console.WriteLine("¿DVD? (si/no)");
             string des2 = Console.ReadLine().ToLower();
+            if (des2 == "si")
+            {
+                dvd = true;
+            }
+            else
+            {
+                dvd = false;
+            }
             Console.WriteLine("¿Maletero mas grande? (si/no)");
             string des3 = Console.ReadLine().ToLower();
+            if (des1 == "si")
+            {
+                maletero_grande = true;
+            }
+            else
+            {
+                maletero_grande = false;
+            }
             if (des1 == "no")
             {
+                asientos_extra = false;
                 Console.WriteLine("¿Electrico? (si/no)");
                 string des4 = Console.ReadLine().ToLower();
+                if (des4=="si")
+                {
+                    electrico = true;
+                }
+                else
+                {
+                    electrico = false;
+                }
             }
-
-
         }
+        
     }
 }
